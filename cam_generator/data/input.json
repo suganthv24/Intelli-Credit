@@ -1,0 +1,43 @@
+{
+ "company_profile": {
+  "name": "ABC Manufacturing Pvt Ltd",
+  "industry": "Auto Components",
+  "promoter": "Rajesh Kumar"
+ },
+
+ "financial_analysis": {
+  "revenue": 52000000,
+  "profit": 6200000,
+  "debt_equity": 1.33,
+  "interest_coverage": 2.6
+ },
+
+ "research_analysis": {
+  "litigation_cases": 1,
+  "negative_news_ratio": 0.42,
+  "sector_risk": "Medium"
+ },
+
+ "operational_insights": {
+  "factory_utilization": 40,
+  "inventory_status": "Slow"
+ },
+
+ "recommendation": {
+  "loan_decision": "APPROVED",
+  "recommended_limit": 42000000,
+  "interest_rate": 11.25
+ },
+
+ "explanation": {
+  "risk_factors": [
+   "promoter litigation risk",
+   "negative sector news",
+   "low factory utilization"
+  ],
+  "positive_signals": [
+   "strong GST revenue",
+   "healthy interest coverage"
+  ]
+ }
+}

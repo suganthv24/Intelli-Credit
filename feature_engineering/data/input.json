@@ -1,0 +1,22 @@
+{
+  "financials": {
+    "revenue_current": 86000000,
+    "revenue_previous": 79000000,
+    "ebit": 12400000,
+    "interest_expense": 2800000,
+    "total_debt": 32000000,
+    "equity": 41000000,
+    "gst_sales": 84500000,
+    "bank_deposits": 26000000
+  },
+  "research": {
+    "litigation_cases": 0,
+    "negative_news": 2,
+    "total_news": 14
+  },
+  "operations": {
+    "capacity_utilization": 78,
+    "inventory_value": 9500000,
+    "cost_of_goods_sold": 42000000
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "company_name": "Reliance Industries Limited",
+  "financials": {
+    "gst_sales": 9200000000000,
+    "bank_deposits": 780000000000,
+    "revenue": 9150000000000,
+    "net_profit": 730000000000,
+    "total_debt": 3300000000000,
+    "equity": 6400000000000,
+    "ebit": 1100000000000,
+    "interest_expense": 180000000000,
+    "operating_cash_flow": 950000000000,
+    "working_capital": 420000000000
+  },
+  "transactions": [
+    { "from": "Reliance Industries Limited", "to": "Reliance Retail Ventures Ltd", "amount": 2500000000 },
+    { "from": "Reliance Retail Ventures Ltd", "to": "Reliance Jio Infocomm Ltd", "amount": 2300000000 },
+    { "from": "Reliance Jio Infocomm Ltd", "to": "Reliance Industries Limited", "amount": 2100000000 }
+  ]
+}
