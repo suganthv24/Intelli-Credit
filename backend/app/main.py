@@ -1,10 +1,14 @@
 import os
 import sys
 
-# Ensure the 'backend' directory is in the Python path
+# Ensure the 'backend' and 'features' directories are in the Python path
 backend_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+features_dir = os.path.join(backend_dir, "app", "features")
+
 if backend_dir not in sys.path:
     sys.path.insert(0, backend_dir)
+if features_dir not in sys.path:
+    sys.path.insert(0, features_dir)
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
