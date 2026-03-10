@@ -1,0 +1,9 @@
+import psycopg
+
+conn = psycopg.connect(
+    "postgresql://neondb_owner:npg_kCmw28XhZWac@ep-super-lab-a1btk7w1-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+)
+
+cur = conn.cursor()
+cur.execute("SELECT 1")
+print(cur.fetchone())

@@ -6,7 +6,7 @@ from fastapi import APIRouter, UploadFile, File, Depends, HTTPException, Backgro
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 from app.database.db import get_db
-from app.database.models import Document
+from app.database.models import Document, User
 
 router = APIRouter()
 
@@ -99,6 +99,13 @@ async def upload_documents(files: list[UploadFile] = File(...), db: Session = De
         
         with open(file_path, "wb") as f:
             f.write(content)
+
+        # Ensure mock user 1 exists
+        mock_user = db.query(User).filter(User.id == 1).first()
+        if not mock_user:
+            mock_user = User(id=1, name="Mock User", email="mock@example.com")
+            db.add(mock_user)
+            db.commit()
 
         # Save to db, tying to mock user 1
         doc = Document(

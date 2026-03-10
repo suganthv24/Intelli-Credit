@@ -5,7 +5,8 @@ from cam_generator.generator.section_generators import (
     risk_section,
     five_cs_section,
     recommendation_section,
-    explanation_section
+    explanation_section,
+    swot_section
 )
 
 def build_cam(data):
@@ -19,7 +20,8 @@ def build_cam(data):
         "Risk Assessment": risk_section(data),
         "Five Cs of Credit": five_cs_section(data),
         "Recommendation": recommendation_section(data),
-        "Decision Explanation": explanation_section(data)
+        "Decision Explanation": explanation_section(data),
+        "SWOT Analysis": swot_section(data)
     }
     
     return sections

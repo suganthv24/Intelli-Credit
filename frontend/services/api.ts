@@ -104,3 +104,49 @@ export async function getDocuments(userId: number = 1) {
   }
   return response.json();
 }
+
+export async function onboardEntity(data: any) {
+  const response = await fetch(`${API_BASE_URL}/entity-onboarding`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(data)
+  });
+  
+  if (!response.ok) {
+    throw new Error("Failed to onboard entity");
+  }
+  
+  return response.json();
+}
+
+export async function classifyDocuments(filenames: string[]) {
+  const response = await fetch(`${API_BASE_URL}/classify-documents`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ filenames })
+  });
+  
+  if (!response.ok) {
+    throw new Error("Failed to classify documents");
+  }
+  return response.json();
+}
+
+export async function extractSchema() {
+  const response = await fetch(`${API_BASE_URL}/extract-schema`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({})
+  });
+  
+  if (!response.ok) {
+    throw new Error("Failed to extract schema");
+  }
+  return response.json();
+}

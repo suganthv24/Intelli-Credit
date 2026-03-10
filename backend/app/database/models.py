@@ -8,6 +8,9 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     email = Column(String, unique=True, index=True)
+    organization = Column(String, nullable=True)
+    role = Column(String, default="Credit Analyst")
+    hashed_password = Column(String, nullable=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     
     sessions = relationship("AnalysisSession", back_populates="user")
@@ -48,19 +51,32 @@ class Company(Base):
     __tablename__ = "companies"
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    industry = Column(String)
-    promoter = Column(String)
+    cin = Column(String)
+    pan = Column(String)
+    sector = Column(String)
+    sub_sector = Column(String)
+    annual_turnover = Column(Float)
+    incorporation_date = Column(DateTime)
     created_at = Column(DateTime, default=datetime.utcnow)
 
 class LoanApplication(Base):
     __tablename__ = "loan_applications"
     id = Column(Integer, primary_key=True, index=True)
     company_id = Column(Integer, ForeignKey("companies.id"), nullable=True)
-    session_id = Column(Integer, ForeignKey("analysis_sessions.id"))
-    risk_probability = Column(Float)
-    loan_decision = Column(String)
-    recommended_limit = Column(Float)
-    interest_rate = Column(Float)
+    session_id = Column(Integer, ForeignKey("analysis_sessions.id"), nullable=True)
+    
+    # Onboarding Fields
+    loan_type = Column(String)
+    loan_amount = Column(Float)
+    tenure = Column(Integer)  # in months
+    purpose = Column(String)
+    
+    # AI Engine Fields
+    risk_probability = Column(Float, nullable=True)
+    loan_decision = Column(String, nullable=True)
+    recommended_limit = Column(Float, nullable=True)
+    interest_rate = Column(Float, nullable=True)
+    
     created_at = Column(DateTime, default=datetime.utcnow)
     
     session = relationship("AnalysisSession", back_populates="loan_application")

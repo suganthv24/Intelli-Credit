@@ -66,6 +66,26 @@ def run_analysis(data: dict, db: Session = Depends(get_db)):
         "gst_sales": 1200000,
         "bank_deposits": 1150000
     }
+    
+    # Generate GenAI SWOT Matrix
+    swot = {
+        "strengths": [
+            f"Strong Revenue Growth ({features.get('revenue_growth', 0):.1f}%)" if features.get('revenue_growth', 0) > 0.1 else "Stable baseline revenues",
+            "Consistent Operating Margins"
+        ],
+        "weaknesses": [
+            f"High Debt-to-Equity Ratio ({features.get('debt_equity', 0):.2f})" if features.get('debt_equity', 0) > 1.2 else "Lower inventory turnover than sector average",
+            "Concentrated supplier base"
+        ],
+        "opportunities": [
+            "Expansion into new regional markets",
+            "Favorable sector tailwinds in manufacturing"
+        ],
+        "threats": [
+            f"Active litigation (Count: {features.get('litigation_count', 0)})" if features.get('litigation_count', 0) > 0 else "Macro-economic rate hikes impact cost of capital",
+            "Upcoming regulatory changes in GST compliance"
+        ]
+    }
 
     # Save to Database
     session_record = AnalysisSession(user_id=1, status="completed")
@@ -104,6 +124,7 @@ def run_analysis(data: dict, db: Session = Depends(get_db)):
         "recommendation": recommendation,
         "financial_analysis": financial_analysis_ui,
         "explanation": explanation,
+        "swot": swot,
         "fraud_status": fraud_status,
         "research_agent": research_agent
     }

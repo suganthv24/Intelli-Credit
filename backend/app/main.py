@@ -12,7 +12,7 @@ if features_dir not in sys.path:
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.routes import upload, analysis, risk, diligence, cam, user
+from app.routes import upload, analysis, risk, diligence, cam, user, onboarding, processing, auth
 from app.database.db import engine
 from app.database.models import Base
 
@@ -29,12 +29,15 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(onboarding.router)
+app.include_router(processing.router)
 app.include_router(upload.router)
 app.include_router(analysis.router)
 app.include_router(risk.router)
 app.include_router(diligence.router)
 app.include_router(cam.router)
 app.include_router(user.router)
+app.include_router(auth.router)
 
 @app.get("/")
 def root():
