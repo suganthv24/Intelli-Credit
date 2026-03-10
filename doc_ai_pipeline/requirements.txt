@@ -1,0 +1,11 @@
+chandra-ocr
+torch
+transformers
+sentence-transformers
+qdrant-client
+pillow
+pymupdf
+requests
+fastapi
+uvicorn[standard]
+python-multipart
