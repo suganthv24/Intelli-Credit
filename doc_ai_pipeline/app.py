@@ -65,6 +65,12 @@ class HealthResponse(BaseModel):
     status: str
 
 
+class CAMResponse(BaseModel):
+    corporate_applicant_id: str
+    status: str
+    cam_data: dict
+
+
 # ── Endpoints ────────────────────────────────────────────────────────
 
 @app.get("/health", response_model=HealthResponse)
@@ -216,6 +222,54 @@ async def query_documents(request: QueryRequest):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Query failed: {e}")
+
+
+
+# ── CAM Endpoint ─────────────────────────────────────────────────────
+
+@app.post("/generate_cam/{corporate_applicant_id}", response_model=CAMResponse)
+async def generate_cam(corporate_applicant_id: str):
+    """
+    Trigger the LangGraph Agentic CAM Workflow for a specific corporate applicant.
+
+    The agent will:
+    1. Plan which financial data points to extract (GST, Bank Credits, Litigation, etc.)
+    2. Retrieve relevant Qdrant chunks tagged with the applicant ID.
+    3. Grade whether the chunks are relevant.
+    4. Extract structured financial data into a master Credit Appraisal JSON.
+    5. Self-correct on failure (up to 3 retries per field) before marking as 'Not Found'.
+
+    Returns the fully assembled Credit Appraisal Memo JSON.
+    """
+    try:
+        from graph import cam_graph
+
+        print(f"\n[CAM] Initiating Credit Appraisal Memo for applicant: {corporate_applicant_id}")
+
+        # Build initial state (clean slate)
+        initial_state = {
+            "corporate_applicant_id": corporate_applicant_id,
+            "current_extraction_goal": "",
+            "retrieved_docs": [],
+            "retry_count": 0,
+            "grade": "",
+            "final_master_json": {},
+        }
+
+        # Run the LangGraph — this blocks until the graph reaches END
+        final_state = await asyncio.to_thread(cam_graph.invoke, initial_state)
+
+        cam_data = final_state.get("final_master_json", {})
+        print(f"[CAM] ✅ CAM generation completed. Fields: {list(cam_data.keys())}")
+
+        return CAMResponse(
+            corporate_applicant_id=corporate_applicant_id,
+            status="success" if cam_data else "no_data",
+            cam_data=cam_data,
+        )
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"CAM generation failed: {e}")
 
 
 # ── Run ──────────────────────────────────────────────────────────────
