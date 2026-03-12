@@ -14,7 +14,7 @@ import re
 import os
 from typing import Optional
 
-# ── Zerve design tokens ──────────────────────────────────────────────────────
+# ── AI design tokens ──────────────────────────────────────────────────────
 _BG  = "#1D1D20"
 _FG  = "#fbfbff"
 _FG2 = "#909094"

@@ -27,7 +27,7 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, Field
 
-# ── Zerve canvas variable imports ──────────────────────────────────────────────
+# ── canvas variable imports ──────────────────────────────────────────────
 from zerve import variable
 
 # Load trained RandomForest model and supporting assets from canvas blocks
@@ -54,7 +54,7 @@ _BG_MEAN = training_X.mean(axis=0)
 
 # ── FastAPI app ────────────────────────────────────────────────────────────────
 app = FastAPI(
-    title="Zerve Credit Intelligence API",
+    title="Intelli-Credit AI Intelligence API",
     description=(
         "Orchestrates the full credit appraisal pipeline: document ingestion → "
         "classification → financial extraction → news sentiment → risk scoring → CAM."

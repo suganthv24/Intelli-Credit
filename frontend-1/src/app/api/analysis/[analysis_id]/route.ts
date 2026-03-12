@@ -3,9 +3,9 @@ import pool from "@/lib/db";
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { analysis_id: string } }
+  context: { params: Promise<{ analysis_id: string }> }
 ) {
-  const { analysis_id } = await params;
+  const { analysis_id } = await context.params;
 
   if (!analysis_id) {
     return NextResponse.json({ error: "Missing analysis_id parameter" }, { status: 400 });

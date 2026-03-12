@@ -20,7 +20,7 @@ export function AiChat({ initialMessage, className }: AiChatProps) {
     {
       id: "1",
       role: "ai",
-      content: initialMessage || "Hello. I am the Zerve AI Underwriter. I've analyzed this company's profile. What would you like to know about the credit decision?",
+      content: initialMessage || "Hello. I am the Intelli-Credit AI Underwriter. I've analyzed this company's profile. What would you like to know about the credit decision?",
     }
   ]);
   const [input, setInput] = useState("");
@@ -65,7 +65,7 @@ export function AiChat({ initialMessage, className }: AiChatProps) {
         responseText = "This borrower has a Risk Score of **72/100 (HIGH RISK)**.\n\nWhile revenues have grown, the high debt load and negative news sentiment (lawsuits) drag the score down. Maximum recommended exposure is limited to ₹100,000 at a high 11.5% premium rate.";
       }
       else {
-        responseText = "Based on the Zerve credit model, the primary driver for this decision is the elevated debt-to-equity ratio combined with recent negative news headlines affecting the sector risk profile. Would you like me to break down the specific financial metrics?";
+        responseText = "Based on the Intelli-Credit AI model, the primary driver for this decision is the elevated debt-to-equity ratio combined with recent negative news headlines affecting the sector risk profile. Would you like me to break down the specific financial metrics?";
       }
 
       setMessages((prev) => [
@@ -85,7 +85,7 @@ export function AiChat({ initialMessage, className }: AiChatProps) {
         </div>
         <div>
           <h3 className="text-sm font-bold text-[#fbfbff]">AI Credit Officer</h3>
-          <p className="text-xs text-[#909094]">Powered by Zerve Intelligence</p>
+          <p className="text-xs text-[#909094]">Powered by Intelli-Credit Intelligence</p>
         </div>
       </div>
 

@@ -48,7 +48,7 @@ export default function DashboardPage() {
         </div>
         <h2 className="text-2xl font-bold text-[#fbfbff]">No Analysis Data</h2>
         <p className="text-[#909094] max-w-md">
-          Complete the onboarding wizard to trigger the Zerve AI credit analysis pipeline.
+          Complete the onboarding wizard to trigger the Intelli-Credit AI credit analysis pipeline.
         </p>
         <button
           onClick={() => router.push("/")}
@@ -62,12 +62,12 @@ export default function DashboardPage() {
 
   // ── Data Mappings (with safe fallbacks) ──────────────────────────────────
 
-  const attributions = (analysis.feature_attributions || []).map((fa) => ({
+  const attributions = (Array.isArray(analysis.feature_attributions) ? analysis.feature_attributions : []).map((fa) => ({
     feature: fa.feature,
     contribution: fa.contribution,
   }));
 
-  const fraudFlags: FraudFlag[] = (analysis.fraud_flags || []).map((ff) => ({
+  const fraudFlags: FraudFlag[] = (Array.isArray(analysis.fraud_flags) ? analysis.fraud_flags : []).map((ff) => ({
     flag_id: ff.flag_id,
     flag_name: ff.flag_name,
     description: ff.description,
@@ -75,7 +75,7 @@ export default function DashboardPage() {
     doc_id: ff.doc_id,
   }));
 
-  const flagSummary = analysis.risk_flag_summary || [];
+  const flagSummary = Array.isArray(analysis.risk_flag_summary) ? analysis.risk_flag_summary : [];
   const radarData = flagSummary.filter((rf) => rf.flagged).map((rf) => {
     const score = Math.min(rf.trigger_count * 25, 100);
     return {
@@ -94,9 +94,9 @@ export default function DashboardPage() {
     };
   });
 
-  const timelineData = analysis.analysis_timeline || [];
+  const timelineData = Array.isArray(analysis.analysis_timeline) ? analysis.analysis_timeline : [];
 
-  const newsArticles = (analysis.news_headlines || []).map((nh) => ({
+  const newsArticles = (Array.isArray(analysis.news_headlines) ? analysis.news_headlines : []).map((nh) => ({
     title: nh.headline,
     sentiment: nh.sentiment === "POSITIVE" ? 0.8 : nh.sentiment === "NEGATIVE" ? -0.8 : 0,
     label: (nh.sentiment?.toLowerCase() || "neutral") as "positive" | "negative" | "neutral",
@@ -209,14 +209,14 @@ export default function DashboardPage() {
             score={analysis.regulatory_compliance_score || 0}
             gstRisk={analysis.gst_compliance_risk || "UNKNOWN"}
             rbiRisk={analysis.rbi_exposure_risk || "UNKNOWN"}
-            policyFlags={analysis.policy_flags || []}
+            policyFlags={Array.isArray(analysis.policy_flags) ? analysis.policy_flags : []}
           />
         </div>
         <div className="bg-[#18181B] border border-[#27272a] rounded-2xl p-5 min-h-[320px]">
           <FinancialPanel
             score={analysis.financial_consistency_score || 0}
             confidence_score={analysis.confidence_score || 0}
-            flags={analysis.cross_document_flags || []}
+            flags={Array.isArray(analysis.cross_document_flags) ? analysis.cross_document_flags : []}
           />
         </div>
         <div className="bg-[#18181B] border border-[#27272a] rounded-2xl overflow-hidden min-h-[320px]">
@@ -232,7 +232,7 @@ export default function DashboardPage() {
       {/* ── Row 5: Legal & MCA + Primary Insight ────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
         <LegalMcaPanel
-          litigationRecords={analysis.litigation_records || []}
+          litigationRecords={Array.isArray(analysis.litigation_records) ? analysis.litigation_records : []}
           directorRiskScore={analysis.director_risk_score}
           legalRiskSummary={analysis.legal_risk_summary}
         />

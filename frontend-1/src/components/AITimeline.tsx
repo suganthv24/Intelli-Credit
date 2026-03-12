@@ -57,9 +57,11 @@ export function AITimeline({ timeline, className }: AITimelineProps) {
         
         <div className="space-y-4">
           {timeline.map((item, idx) => {
-            const icon = STEP_ICONS[item.step] || <CheckCircle2 className="w-4 h-4 text-[#8DE5A1]" />;
-            const color = STEP_COLORS[item.step] || "#8DE5A1";
-            const formattedStep = item.step.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase());
+            const icon = (item.step && STEP_ICONS[item.step]) || <CheckCircle2 className="w-4 h-4 text-[#8DE5A1]" />;
+            const color = (item.step && STEP_COLORS[item.step]) || "#8DE5A1";
+            const formattedStep = item.step 
+              ? item.step.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+              : "Analysis Step";
 
             return (
               <div key={idx} className="relative pl-10">

@@ -20,7 +20,7 @@ import json
 from pathlib import Path
 from collections import Counter
 
-# ── Zerve design tokens ─────────────────────────────────────────────────────
+# ── AI design tokens ─────────────────────────────────────────────────────
 BG_COL      = "#1D1D20"
 FG_COL      = "#fbfbff"
 FG2_COL     = "#909094"

@@ -10,7 +10,7 @@ import matplotlib.patches as mpatches
 import warnings
 warnings.filterwarnings('ignore')
 
-# ── Zerve Design System ────────────────────────────────────────────────────────
+# ── AI Design System ────────────────────────────────────────────────────────
 _BG  = '#1D1D20'
 _FG  = '#fbfbff'
 _FG2 = '#909094'

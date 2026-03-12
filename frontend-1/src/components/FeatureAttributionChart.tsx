@@ -31,7 +31,7 @@ export function FeatureAttributionChart({ data, className }: FeatureAttributionC
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" "),
     // Determine color based on positive (increases risk) or negative (decreases risk)
-    fill: item.contribution > 0 ? "#f04438" : "#A1C9F4", // Zerve red vs Zerve blue
+    fill: item.contribution > 0 ? "#f04438" : "#A1C9F4", // Risk red vs Brand blue
     direction: item.contribution > 0 ? "Increases Risk" : "Reduces Risk"
   }));
 

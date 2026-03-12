@@ -2,10 +2,10 @@ import type { CreditAnalysis } from "@/store/creditStore";
 
 /**
  * Calls the Next.js API proxy route which forwards the request
- * to the Zerve backend server-side, storing the files and DB record.
+ * to the internal AI backend server-side, storing the files and DB record.
  */
 export async function analyzeCompany(formData: FormData): Promise<CreditAnalysis> {
-  console.log("[Zerve] Calling /api/analyze proxy with FormData...");
+  console.log("[AI] Calling /api/analyze proxy with FormData...");
 
   const res = await fetch("/api/analyze", {
     method: "POST",
@@ -18,7 +18,7 @@ export async function analyzeCompany(formData: FormData): Promise<CreditAnalysis
   }
 
   const data = await res.json();
-  console.log("[Zerve] Analysis response received successfully");
+  console.log("[AI] Analysis response received successfully");
   return data;
 }
 

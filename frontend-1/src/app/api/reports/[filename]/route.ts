@@ -3,14 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 const BACKEND_URL = "https://intellicredit.hub.zerve.cloud";
 
 /**
- * Proxy route for downloading CAM report PDFs from the Zerve backend.
+ * Proxy route for downloading CAM report PDFs from the AI backend.
  * Now includes a fallback to a dummy PDF if the backend is unreachable.
  */
 export async function GET(
   request: NextRequest,
-  { params }: { params: { filename: string } }
+  context: { params: Promise<{ filename: string }> }
 ) {
-  const { filename } = await params;
+  const { filename } = await context.params;
 
   if (!filename) {
     return NextResponse.json(
@@ -19,7 +19,7 @@ export async function GET(
     );
   }
 
-  // ── Try the real Zerve cloud backend first ────────────────────────────────
+  // ── Try the real cloud backend first ────────────────────────────────
   try {
     const fetchPath = `/reports/${filename}`;
     console.log(`[Report Proxy] Fetching ${BACKEND_URL}${fetchPath} ...`);
@@ -38,9 +38,9 @@ export async function GET(
     if (res.ok) {
       const contentType = res.headers.get("content-type") || "application/pdf";
       const blob = await res.arrayBuffer();
-      
+
       console.log(`[Report Proxy] ✅ Live PDF served: ${filename}`);
-      
+
       return new NextResponse(blob, {
         status: 200,
         headers: {
@@ -50,7 +50,7 @@ export async function GET(
         },
       });
     }
-    
+
     console.warn(`[Report Proxy] Backend responded ${res.status}, generating demo PDF`);
   } catch (err: any) {
     console.warn(`[Report Proxy] Backend unreachable: ${err.message}, generating demo PDF`);

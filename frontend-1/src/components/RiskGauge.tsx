@@ -10,7 +10,7 @@ interface RiskGaugeProps {
   className?: string;
 }
 
-// Zerve palette colors for the risk bands
+// AI palette colors for the risk bands
 const RISK_COLORS = [
   "#8DE5A1", // Low (0-30)
   "#FFB482", // Moderate (30-55)
@@ -65,12 +65,9 @@ export function RiskGauge({ score, band, decision, className }: RiskGaugeProps) 
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-            
-            {/* Custom needle SVG drawn on top via SVG paths - simplified approach using standard recharts or native SVG overlay */}
           </PieChart>
         </ResponsiveContainer>
         
-        {/* Absolute positioned custom needle because Recharts needle requires complex custom props */}
         <div 
           className="absolute bottom-0 left-1/2 w-1 h-[75%] origin-bottom bg-[#fbfbff] transition-transform duration-1000 ease-out z-10 rounded-full"
           style={{ 
@@ -78,9 +75,23 @@ export function RiskGauge({ score, band, decision, className }: RiskGaugeProps) 
             transformOrigin: "bottom center"
           }}
         >
-          {/* Needle base */}
           <div className="absolute -bottom-2 -left-1.5 w-4 h-4 rounded-full bg-[#fbfbff] border-4 border-[#27272a]" />
         </div>
+      </div>
+      
+      {/* ── Center Label ────────────────────────────────────────────────── */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center mt-8">
+        <p className="text-[10px] font-bold text-[#909094] uppercase tracking-widest mb-1">AI INSIGHT</p>
+        <div className="text-4xl font-black text-[#fbfbff] tracking-tighter leading-none mb-1">
+          {score.toFixed(1)}
+        </div>
+        <p className={cn("text-[10px] font-black px-2 py-0.5 rounded inline-block", 
+          score < 30 ? "bg-[#8DE5A1]/20 text-[#8DE5A1]" : 
+          score < 55 ? "bg-[#FFB482]/20 text-[#FFB482]" : 
+          score < 75 ? "bg-[#ffd400]/20 text-[#ffd400]" : "bg-[#f04438]/20 text-[#f04438]"
+        )}>
+          {band}
+        </p>
       </div>
       
       {/* Metrics breakdown */}

@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-zerve-bg: #1D1D20;
-  --color-zerve-fg: #fbfbff;
-  --color-zerve-fg2: #909094;
-  --color-zerve-blue: #A1C9F4;
-  --color-zerve-orange: #FFB482;
-  --color-zerve-green: #8DE5A1;
-  --color-zerve-red: #f04438;
-  --color-zerve-yellow: #ffd400;
+  --color-ai-bg: #1D1D20;
+  --color-ai-fg: #fbfbff;
+  --color-ai-fg2: #909094;
+  --color-ai-blue: #A1C9F4;
+  --color-ai-orange: #FFB482;
+  --color-ai-green: #8DE5A1;
+  --color-ai-red: #f04438;
+  --color-ai-yellow: #ffd400;
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

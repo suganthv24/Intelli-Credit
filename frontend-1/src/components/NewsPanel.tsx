@@ -21,7 +21,8 @@ export function NewsPanel({ articles, averageSentiment, className }: NewsPanelPr
         <div className="w-12 h-12 rounded-full bg-[#1D1D20] border border-[#3f3f46] flex items-center justify-center mb-4">
           <Newspaper className="w-6 h-6 text-[#909094]" />
         </div>
-        <h3 className="text-lg font-bold text-[#fbfbff] mb-1">No News Data</h3>
+        <h3 className="text-base font-bold text-[#fbfbff]">Market Intelligence</h3>
+        <p className="text-xs text-[#909094]">AI Sentiment Analysis</p>
         <p className="text-sm text-[#909094] text-center max-w-xs">No recent news articles found for this entity.</p>
       </div>
     );
@@ -32,10 +33,10 @@ export function NewsPanel({ articles, averageSentiment, className }: NewsPanelPr
   let overallLabel = "Neutral";
   
   if (averageSentiment >= 0.05) {
-    overallColor = "#8DE5A1"; // Zerve Green
+    overallColor = "#8DE5A1"; // AI Green
     overallLabel = "Positive";
   } else if (averageSentiment <= -0.05) {
-    overallColor = "#f04438"; // Zerve Red
+    overallColor = "#f04438"; // AI Red
     overallLabel = "Negative";
   }
 

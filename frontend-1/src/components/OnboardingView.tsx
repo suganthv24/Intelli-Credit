@@ -240,11 +240,11 @@ export default function OnboardingView() {
         formData.append("documents", docEntry.file);
       }
 
-      console.log("[Zerve] Starting analysis for:", companyName);
+      console.log("[AI] Starting analysis for:", companyName);
       apiResponse = await analyzeCompany(formData);
-      console.log("[Zerve] API response received:", apiResponse);
+      console.log("[AI] API response received:", apiResponse);
     } catch (err: any) {
-      console.error("[Zerve] API error:", err);
+      console.error("[AI] API error:", err);
       apiErr = err?.message ?? "Credit analysis failed. Please retry.";
     }
 
@@ -274,7 +274,7 @@ export default function OnboardingView() {
               <Loader2 className="w-8 h-8 text-[#A1C9F4] animate-spin" />
             </div>
             <h2 className="text-2xl font-bold text-[#fbfbff]">Running AI Credit Analysis</h2>
-            <p className="text-sm text-[#909094] mt-1">Zerve AI pipeline processing {companyName}…</p>
+            <p className="text-sm text-[#909094] mt-1">AI pipeline processing {companyName}…</p>
           </div>
 
           <div className="space-y-2">
@@ -328,7 +328,7 @@ export default function OnboardingView() {
         {/* Header */}
         <div className="text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#A1C9F4]/10 border border-[#A1C9F4]/20 text-xs font-semibold text-[#A1C9F4] mb-3">
-            <SparklesIcon className="w-3.5 h-3.5" /> Zerve AI Credit Officer
+            <SparklesIcon className="w-3.5 h-3.5" /> Intelli-Credit AI Credit Officer
           </div>
           <h1 className="text-3xl font-bold text-[#fbfbff]">Credit Analysis Intake</h1>
           <p className="text-sm text-[#909094] mt-1">Complete all steps to initiate full AI-powered credit appraisal</p>
@@ -593,7 +593,7 @@ export default function OnboardingView() {
         <div className="flex items-start gap-3 p-4 rounded-xl bg-[#8DE5A1]/10 border border-[#8DE5A1]/20 max-w-xl mx-auto">
           <CheckCircle2 className="w-4 h-4 text-[#8DE5A1] shrink-0 mt-0.5" />
           <p className="text-xs text-[#8DE5A1]">
-            All data is processed entirely by the Zerve AI Credit Officer engine. No manual scoring is applied.
+            All data is processed entirely by the Intelli-Credit AI Credit Officer engine. No manual scoring is applied.
           </p>
         </div>
       </div>
